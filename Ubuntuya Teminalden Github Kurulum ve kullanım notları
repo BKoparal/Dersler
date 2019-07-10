@@ -1,0 +1,90 @@
+Git'in Kurulumu
+Gelin Git'i kullanmaya başlayalım. Her şeyden önce, Git'i kurmanız gerekiyor. Bunu iki başlıca biçimde gerçekleştirebilirsiniz: 
+kaynak kodundan ya da platformunuz için halihazırda varolan paketi kullanarak kurabilirsiniz.
+
+
+Kaynak Kodundan Kurulum
+$ apt-get install git
+
+
+Kurulum işleminin gerçekleştiğini teyit etmek için şu komutu kullanabilirsiniz:
+git --version
+
+İlk Ayarlamalar
+	Kimliğiniz: 
+	$ git config --global user.name "John Doe"  //Gitteki kullanıcı adı
+	$ git config --global user.email johndoe@example.com  //Gitteki mail adresi
+
+
+Ayarlarınızı Gözden Geçirmek
+Ayarlarınızı gözden geçirmek isterseniz, Git'in bulabildiği bütün ayarları listelemek için git config --list komutunu kullanabilirsiniz.
+
+
+Yardım Almak
+Git'i kullanırken yardıma ihtiyacınız olursa, herhangi bir Git komutunun yardım kılavuzu sayfasını (manpage) üç değişik biçimde görüntüleyebilirsiniz:
+$ git help <eylem>
+$ git <eylem> --help
+Örnek: $ git help config
+
+
+Git Projesi Oluşturmak
+Öncelikle bash terminali açalım. Proje oluşturma işlemine geçmeden kullandığımız komutlardan bahsedelim.
+pwd: terminal üzerinde bulunduğumuz dizinin adresini vermektedir.
+ls: listelemek anlamındadır. Bulunduğumuz dizin üzerindeki dosya ve dizinleri listelemek için kullanılır.
+cd: açılımı change directory olan cd, ulaşılmak istenilen dizin için kullanılır. Bir önceki dizine ulaşmak için cd .. komutunu kullanırız.
+clear: terminali temizlemek için kullanılır. Kısayolu CTRL — L ‘dir.
+
+ÖRNEK PROJE OLUŞTURMA
+Şimdi, masaüstüne projem isminde bir klasör oluşturun ve ardından terminali açın. Yukarıda öğrenmiş olduğumuz komutlar yardımıyla oluşturduğumuz klasöre ulaşalım:
+$ cd Desktop
+$ cd projem
+projem isimli klasöre ulaştıysanız bu klasörün bir git projesi olduğunu belirtmek için aşağıdaki komutu verip enter tuşuna basın:
+git init   //REPOSITORY belirtir.
+Bu komutu girdikten sonra projem isimli klasörümüz bir git projesi haline gelmiştir. Eğer bu klasörü açıp baktıysanız içinin boş olduğunu göreceksiniz. 
+Aslında klasör boş değil, oluşan dosyalar gizli halde olduğundan gözükmemektedir. Oluşan bu dosyayı görmek isterseniz terminalden şu komutu kullanabilirsiniz:
+$ ls -a
+
+
+Örnek Projemizi Git Deposuna Ekleyelim
+Öncelikle belirttiğimiz klasörde yüklenecek yeni bir şeyler var mı bakalım bunun için 
+$ git status kullanılır
+burada gelen mesajda  nothing to commit (create/copy files and use "git add" to track)  bu cümle varsa commit edilecek bir şey yok diyo yani olmayan bir şeyi gönderemez repository ye bir şeyler ekleyin.
+No commits yet mesajı ise commit işleminin yapılmadığını belirtir.
+dolayısıyla yeni bir şeyler ekledikten sonra
+$ git add .       <--- sonunda nokta var unutma
+$ git commit -m "AÇIKLAMANIZ" 
+yukarıdaki komutlarda proje gite gönderilir.
+
+
+Değişiklikler
+Dosyalarımız üzerinde değişiklik işlemleri yapılmış ise satır satır listelemek için 
+$ git diff
+ilgili komutu çalıştırdığımda yapılan değişiklikler kırmızı (-), ekleme yapıldıysa (+) yeşil renkte görüntülenir. 
+Yapılan işlemlerin geçerli olması için her zamanki yaptığımız gibi add ve commit işlemi yapmamız gerekir
+
+Dosya Silme
+Git projesinde dosya silmek için 2 yöntem vardır. Birincisi elle silmek ikincisi ise git komutuyla silmek. Şimdi dizinden elle sildiğimiz dosyayı git ile bildirelim:
+git status
+elle hakkında dosyasını sildikten sonra git status komutuyla yapılması gereken işlemi sorguladık. 
+Ardından git rm dosyaadı komutuyla silinen dosyayı geçiş bölgesine gönderelim ve ardından commit işlemini gerçekleştirelim.
+$ git rm main.py
+$ git commit -m "main dosyasi silindi"
+main dosyasını rm komutu ile sildik. Eğer bir klasörü silmek istersek şu komutu kullanırız:
+$ git rm -r sil/
+Burada ekstra olarak -r komutu verdik. Bunun anlamı recursive özyinelemeli demektedir. Yaptığı şey ise klasörün içindekileri ardından klasörü silmektir.
+
+Dosya isimlendirme ve taşıma
+Bir dosyanın isimini 2 şekilde değiştirebiliriz. Birincisi elle diğeri ise git komutuyla. Git komutuyla değiştirmek daha kolay olduğundan git komutuyla dosyanın isimini değiştirelim:
+$ git mv hakkinda.py main.py
+$ git commit -m "dosya ismi degistirme"
+hakkinda.py dosyasının adını main.py şeklinde değiştirmek istediğimizi belirttik. Burada mv komutu ile dosya adını değiştirebilir veya dosyayı taşıyabiliriz. 
+Dosyayı klasöre taşımak için:git mv dosyadi klasoradi/şeklinde bir syntax kullanarak dosyayı istenilen klasöre taşıyabiliriz. Bu işlemi commitlemeyi unutmayın.
+
+Değişiklikleri Geri Almak
+Çalışma Dizininde Değişikliği Geri Alma
+Çalışma dizininde yapılan bir değişikliği geri almak için şu komutları kullanırız:git checkout -- dosyaadıBu komut yardımıyla yanlışlıkla sildiğimiz dosyaları ve dosya içindeki değerleri geri getirebiliriz.
+Geçiş Bölgesindeki yapılan değişiklikleri geri almak için şu komutları kullanırız:git reset HEAD dosyaadicommit yapmadan önce yani geçiş bölgesindeki yaptığımız hatayı düzeltmek için dosyayı geri almak için ilgili komut kullanılır. 
+Bu komut tek başına yeterli olmadığından işlemin tamamıyla gerçekleştirilmesi için şu komutuda çalıştırmamız gerekir.git checkout -- dosyaadıkomutunun ardından çalışma dizininde yaptığınız işlemin geçerli olup olmadığını kontrol edebilirsiniz.
+
+
+
