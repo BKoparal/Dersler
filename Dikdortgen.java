@@ -11,6 +11,7 @@ package nyonyazlimilkders;
  */
 public class Dikdortgen extends AbstractClass{
     private int aKenari,bKenari;
+insert;
 
     public Dikdortgen(int aKenari, int bKenari) {
         this.aKenari = aKenari;
